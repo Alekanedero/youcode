@@ -4,8 +4,8 @@ export default function Home() {
   return (
     <div>
       <Card>
-        <CardHeader>
-          <CardTitle>Hello word</CardTitle>
+        <CardHeader className="flex justify-center items-center">
+          <CardTitle>Hello les chikens !!</CardTitle>
         </CardHeader>
       </Card>
     </div>

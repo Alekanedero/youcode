@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
+    "@faker-js/faker": "github:faker-js/faker",
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.2",
@@ -58,5 +59,8 @@
     "prisma": "^6.0.1",
     "tailwindcss": "^3.4.16",
     "typescript": "^5.7.2"
+  },
+  "prisma": {
+    "seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }

@@ -123,6 +123,9 @@ importers:
       '@eslint/eslintrc':
         specifier: ^3.2.0
         version: 3.2.0
+      '@faker-js/faker':
+        specifier: github:faker-js/faker
+        version: https://codeload.github.com/faker-js/faker/tar.gz/ad8b3604743bf4f1616752cf4f0a9af8278a4e25
       '@types/node':
         specifier: ^22.10.2
         version: 22.10.2
@@ -216,6 +219,11 @@ packages:
   '@eslint/plugin-kit@0.2.4':
     resolution: {integrity: sha512-zSkKow6H5Kdm0ZUQUB2kV5JIXqoG0+uH5YADhaEHswm664N9Db8dXSi0nMJpacpMf+MyyglF1vnZohpEg5yUtg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@faker-js/faker@https://codeload.github.com/faker-js/faker/tar.gz/ad8b3604743bf4f1616752cf4f0a9af8278a4e25':
+    resolution: {tarball: https://codeload.github.com/faker-js/faker/tar.gz/ad8b3604743bf4f1616752cf4f0a9af8278a4e25}
+    version: 9.3.0
+    engines: {node: '>=18.0.0', npm: '>=9.0.0'}
 
   '@floating-ui/core@1.6.8':
     resolution: {integrity: sha512-7XJ9cPU+yI2QeLS+FCSlqNFZJq8arvswefkZrYI1yQBbftw6FyrZOxYSh+9S7z7TpeWlRt9zJ5IhM1WIL334jA==}
@@ -2626,6 +2634,8 @@ snapshots:
   '@eslint/plugin-kit@0.2.4':
     dependencies:
       levn: 0.4.1
+
+  '@faker-js/faker@https://codeload.github.com/faker-js/faker/tar.gz/ad8b3604743bf4f1616752cf4f0a9af8278a4e25': {}
 
   '@floating-ui/core@1.6.8':
     dependencies:

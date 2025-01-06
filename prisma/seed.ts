@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-import {faker} from 'faker';
+import { PrismaClient } from "@prisma/client";
+import { faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
 // Dans la function `main`, je fais un code pour créer 10 utilisateurs qui ont chacun 1 cours et 100 relations entre les cours et les utilisateurs en tant qu'élèves.
@@ -23,12 +23,12 @@ const main = async () => {
                     {
                       name: faker.lorem.words(3),
                       content: faker.lorem.paragraph(),
-                      rank: 'aaaaaa',
+                      rank: "aaaaaa",
                     },
                     {
                       name: faker.lorem.words(3),
                       content: faker.lorem.paragraph(),
-                      rank: 'aaaaab',
+                      rank: "aaaaab",
                     },
                   ],
                 },

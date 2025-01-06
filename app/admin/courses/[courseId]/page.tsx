@@ -1,19 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
+
 import {
   Layout,
   LayoutContent,
   LayoutHeader,
   LayoutTitle,
-} from '@/components/layout/layout';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { buttonVariants } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Typography } from '@/components/ui/typography';
-import { getRequiredAuthSession } from '@/lib/auth';
-import Link from 'next/link';
-import { CoursePaginationButton } from '../../../../src/features/pagination/PaginationButton';
-import { getCourse } from './course.query';
+} from "@/components/layout/layout";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { buttonVariants } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Typography } from "@/components/ui/typography";
+import { getRequiredAuthSession } from "@/lib/auth";
+import Link from "next/link";
+import { CoursePaginationButton } from "../../../../src/features/pagination/PaginationButton";
+import { getAdminCourse } from "./course.query";
 
 export default async function CoursePage({
   params,
@@ -23,20 +31,17 @@ export default async function CoursePage({
     courseId: string;
   };
   searchParams: { [key: string]: string | string[] | undefined };
-}) 
-
-{
-  const page = Number(searchParams.page ?? 1);  
+}) {
+  const page = Number(searchParams.page ?? 1);
   console.log({ page });
 
   const session = await getRequiredAuthSession();
 
-  const course = await getCourse({
+  const course = await getAdminCourse({
     courseId: params.courseId,
     userId: session.user.id,
     userPage: page,
   });
-
 
   return (
     <Layout>
@@ -61,7 +66,10 @@ export default async function CoursePage({
                       <Avatar className="rounded">
                         <AvatarFallback>{user.email?.[0]}</AvatarFallback>
                         {user.image && (
-                          <AvatarImage src={user.image} alt={user.email ?? ''} />
+                          <AvatarImage
+                            src={user.image}
+                            alt={user.email ?? ""}
+                          />
                         )}
                       </Avatar>
                     </TableCell>
@@ -90,7 +98,7 @@ export default async function CoursePage({
             <Avatar className="rounded">
               <AvatarFallback>{course.name?.[0]}</AvatarFallback>
               {course.image && (
-                <AvatarImage src={course.image} alt={course.name ?? ''} />
+                <AvatarImage src={course.image} alt={course.name ?? ""} />
               )}
             </Avatar>
             <CardTitle>{course.name}</CardTitle>
@@ -101,15 +109,15 @@ export default async function CoursePage({
             <Link
               href={`/admin/courses/${course.id}/edit`}
               className={buttonVariants({
-                variant: 'outline',
+                variant: "outline",
               })}
             >
               Edit
-            </Link>{' '}
+            </Link>{" "}
             <Link
               href={`/admin/courses/${course.id}/lessons`}
               className={buttonVariants({
-                variant: 'outline',
+                variant: "outline",
               })}
             >
               Edit lessons

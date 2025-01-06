@@ -1,6 +1,6 @@
-import { prisma } from '@/lib/prisma';
+import { prisma } from "@/lib/prisma";
 
-export const getCourse = async ({
+export const getAdminCourse = async ({
   courseId,
   userId,
   userPage,
@@ -42,12 +42,14 @@ export const getCourse = async ({
       },
     },
   });
+
   const users = courses?.users.map((user) => {
     return {
       canceled: user.canceledAt ? true : false,
       ...user.user,
     };
   });
+
   return {
     ...courses,
     users,

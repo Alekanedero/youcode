@@ -19,6 +19,7 @@ export const CourseCard = (props: CourseCardProps) => {
               <AvatarImage src={props.course.image} />
             ) : null}
           </Avatar>
+
           <div className="flex flex-col gap-3">
             <CardTitle>{props.course.name}</CardTitle>
             <div className="flex flex-row gap-2">
@@ -28,6 +29,7 @@ export const CourseCard = (props: CourseCardProps) => {
                   <AvatarImage src={props.course.creator.image} />
                 ) : null}
               </Avatar>
+
               <Typography variant="large" className=" text-muted-foreground">
                 {props.course.creator.name}
               </Typography>

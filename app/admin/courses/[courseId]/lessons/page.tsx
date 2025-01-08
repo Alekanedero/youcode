@@ -4,12 +4,12 @@ import {
   LayoutContent,
   LayoutHeader,
   LayoutTitle,
-} from '@/components/layout/layout';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { getRequiredAuthSession } from '@/lib/auth';
-import { notFound } from 'next/navigation';
-import { LessonItem } from './lessonItem';
-import { getCourseLessons } from './lessons.query';
+} from "@/components/layout/layout";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getRequiredAuthSession } from "@/lib/auth";
+import { notFound } from "next/navigation";
+import { getCourseLessons } from "./lessons.query";
+import { AdminLessonItem } from "./AdminlessonItem";
 
 export default async function CourseLessonsPage({
   params,
@@ -17,15 +17,13 @@ export default async function CourseLessonsPage({
   params: {
     courseId: string;
   };
-}) 
-
-{
+}) {
   const session = await getRequiredAuthSession();
   const course = await getCourseLessons({
     courseId: params.courseId,
     userId: session.user.id,
   });
-  
+
   if (!course) {
     notFound();
   }
@@ -42,7 +40,7 @@ export default async function CourseLessonsPage({
           </CardHeader>
           <CardContent className="flex flex-col gap-2">
             {course.lessons.map((lesson) => (
-              <LessonItem key={lesson.id} lesson={lesson} />
+              <AdminLessonItem key={lesson.id} lesson={lesson} />
             ))}
           </CardContent>
         </Card>

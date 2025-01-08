@@ -21,7 +21,7 @@ import { Typography } from "@/components/ui/typography";
 import { getRequiredAuthSession } from "@/lib/auth";
 import Link from "next/link";
 import { CoursePaginationButton } from "../../../../src/features/pagination/PaginationButton";
-import { getAdminCourse } from "./course.query";
+import { getAdminCourse } from "./admin-course.query";
 
 export default async function CoursePage({
   params,

@@ -35,6 +35,7 @@ export const CourseForm = ({ defaultValue }: CourseFormProps) => {
 
   return (
     <Form
+      className="flex flex-col gap-6"
       form={form}
       onSubmit={async (values) => {
         console.log(values);
@@ -101,7 +102,11 @@ export const CourseForm = ({ defaultValue }: CourseFormProps) => {
           <FormItem>
             <FormLabel>Presentation</FormLabel>
             <FormControl>
-              <Textarea placeholder="## Some title" {...field} />
+              <Textarea
+                className="h-36"
+                placeholder="## Some title"
+                {...field}
+              />
             </FormControl>
             <FormDescription>Markdown is supported.</FormDescription>
             <FormMessage />

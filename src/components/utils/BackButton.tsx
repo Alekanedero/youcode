@@ -5,6 +5,7 @@ import { Button, ButtonProps } from "../ui/button";
 
 export const BackButton = (props: ButtonProps) => {
   const router = useRouter();
+
   return (
     <Button
       {...props}
@@ -12,6 +13,8 @@ export const BackButton = (props: ButtonProps) => {
         router.back();
         props?.onClick?.(e);
       }}
+      variant={"outline"}
+      size={"sm"}
     />
   );
 };

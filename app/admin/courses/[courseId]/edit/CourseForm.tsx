@@ -15,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { courseActionEdit } from "./course.action";
+import { courseActionCreate, courseActionEdit } from "./course.action";
 import { CourseFormSchema } from "./course.schema";
 import { SubmitButton } from "@/components/form/SubmitButton";
 
@@ -48,7 +48,7 @@ export const CourseForm = ({ defaultValue }: CourseFormProps) => {
           });
 
           if (result) {
-            toast.success(result.data);
+            // toast.success(result.data);
             router.push(`/admin/courses/${defaultValue.id}`);
             router.refresh();
             return;
@@ -61,6 +61,9 @@ export const CourseForm = ({ defaultValue }: CourseFormProps) => {
           return;
         } else {
           console.log("Create course");
+          await courseActionCreate(values);
+          router.push(`/admin/courses`);
+          router.refresh();
           // Ajoute ici la logique pour créer un cours
         }
       }}

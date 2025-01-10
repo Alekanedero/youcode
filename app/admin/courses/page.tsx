@@ -1,10 +1,12 @@
 import {
   Layout,
+  LayoutActions,
   LayoutContent,
   LayoutHeader,
   LayoutTitle,
 } from "@/components/layout/layout";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -28,9 +30,20 @@ export default async function CoursesPage() {
   });
   return (
     <Layout>
-      <LayoutHeader>
+      <LayoutHeader className="flex flex-row justify-between">
         <LayoutTitle>Courses</LayoutTitle>
       </LayoutHeader>
+      <LayoutActions>
+        <Link
+          className={`${buttonVariants({
+            size: "sm",
+            variant: "secondary",
+          })} `}
+          href="/admin/courses/new"
+        >
+          New course
+        </Link>
+      </LayoutActions>
       <LayoutContent>
         <Card>
           <CardContent className="mt-4">

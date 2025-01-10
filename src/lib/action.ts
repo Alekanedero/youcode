@@ -19,14 +19,15 @@ export const action = createSafeActionClient({
 export const authenticatedAction = action.use(async ({ next }) => {
   const session = await getAuthSession();
   const user = session?.user;
+  const userId = user?.id;
 
-  if (!user) {
+  if (!userId) {
     throw new ServerError("You must be logged in to perform this action.");
   }
 
   return next({
     ctx: {
-      userId: user?.id,
+      userId,
       user,
     },
   });

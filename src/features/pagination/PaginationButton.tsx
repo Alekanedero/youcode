@@ -1,16 +1,20 @@
-'use client';
-import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
+"use client";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import React from "react";
 
 export type CoursePaginationButtonProps = {
-  totalPage: number;
   page: number;
   baseUrl: string;
-};
+} & React.HTMLAttributes<HTMLButtonElement>;
 
-export const CoursePaginationButton = (props: CoursePaginationButtonProps) => {
+export const CoursePaginationButton = ({
+  page,
+  baseUrl,
+  ...props
+}: CoursePaginationButtonProps) => {
   const router = useRouter();
-  
+
   return (
     <div className="flex gap-2">
       <Button
@@ -18,11 +22,12 @@ export const CoursePaginationButton = (props: CoursePaginationButtonProps) => {
         size="sm"
         onClick={() => {
           const searchParams = new URLSearchParams({
-            page: String(props.page - 1),
+            page: String(page - 1),
           });
-          const url = `${props.baseUrl}?${searchParams.toString()}`;
+          const url = `${baseUrl}?${searchParams.toString()}`;
           router.push(url);
         }}
+        {...props}
       >
         Previous
       </Button>
@@ -31,11 +36,12 @@ export const CoursePaginationButton = (props: CoursePaginationButtonProps) => {
         size="sm"
         onClick={() => {
           const searchParams = new URLSearchParams({
-            page: String(props.page + 1),
+            page: String(page + 1),
           });
-          const url = `${props.baseUrl}?${searchParams.toString()}`;
+          const url = `${baseUrl}?${searchParams.toString()}`;
           router.push(url);
         }}
+        {...props}
       >
         Next
       </Button>

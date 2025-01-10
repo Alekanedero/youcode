@@ -40,31 +40,33 @@ export const CourseForm = ({ defaultValue }: CourseFormProps) => {
       onSubmit={async (values) => {
         console.log(values);
 
-        if (defaultValue?.id) {
-          console.log("Update course");
-          const result = await courseActionEdit({
-            courseId: defaultValue.id,
-            data: values,
-          });
+        try {
+          let result;
+
+          if (defaultValue?.id) {
+            console.log("Update course");
+            result = await courseActionEdit({
+              courseId: defaultValue.id,
+              data: values,
+            });
+          } else {
+            console.log("Create course");
+            result = await courseActionCreate(values);
+          }
 
           if (result) {
-            // toast.success(result.data);
-            router.push(`/admin/courses/${defaultValue.id}`);
+            const redirectUrl = defaultValue?.id
+              ? `/admin/courses/${defaultValue.id}`
+              : `/admin/courses`;
+            router.push(redirectUrl);
             router.refresh();
             return;
           } else {
-            toast.error("Some error occurred", {
-              // description: result?.serverError,
-            });
+            toast.error("An unexpected error occurred.");
           }
-
-          return;
-        } else {
-          console.log("Create course");
-          await courseActionCreate(values);
-          router.push(`/admin/courses`);
-          router.refresh();
-          // Ajoute ici la logique pour créer un cours
+        } catch (error) {
+          console.error("Error occurred:", error);
+          toast.error("Failed to complete the action. Please try again.");
         }
       }}
     >

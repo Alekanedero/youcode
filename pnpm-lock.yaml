@@ -131,7 +131,7 @@ importers:
         version: 3.2.0
       '@faker-js/faker':
         specifier: github:faker-js/faker
-        version: https://codeload.github.com/faker-js/faker/tar.gz/ad8b3604743bf4f1616752cf4f0a9af8278a4e25
+        version: https://codeload.github.com/faker-js/faker/tar.gz/42dade59d3f6ac756965ca3fd951618e9ac24327
       '@tailwindcss/typography':
         specifier: ^0.5.15
         version: 0.5.15(tailwindcss@3.4.16)
@@ -229,8 +229,8 @@ packages:
     resolution: {integrity: sha512-zSkKow6H5Kdm0ZUQUB2kV5JIXqoG0+uH5YADhaEHswm664N9Db8dXSi0nMJpacpMf+MyyglF1vnZohpEg5yUtg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@faker-js/faker@https://codeload.github.com/faker-js/faker/tar.gz/ad8b3604743bf4f1616752cf4f0a9af8278a4e25':
-    resolution: {tarball: https://codeload.github.com/faker-js/faker/tar.gz/ad8b3604743bf4f1616752cf4f0a9af8278a4e25}
+  '@faker-js/faker@https://codeload.github.com/faker-js/faker/tar.gz/42dade59d3f6ac756965ca3fd951618e9ac24327':
+    resolution: {tarball: https://codeload.github.com/faker-js/faker/tar.gz/42dade59d3f6ac756965ca3fd951618e9ac24327}
     version: 9.3.0
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
 
@@ -2919,7 +2919,7 @@ snapshots:
     dependencies:
       levn: 0.4.1
 
-  '@faker-js/faker@https://codeload.github.com/faker-js/faker/tar.gz/ad8b3604743bf4f1616752cf4f0a9af8278a4e25': {}
+  '@faker-js/faker@https://codeload.github.com/faker-js/faker/tar.gz/42dade59d3f6ac756965ca3fd951618e9ac24327': {}
 
   '@floating-ui/core@1.6.8':
     dependencies:

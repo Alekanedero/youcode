@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-
 import {
   Layout,
   LayoutContent,
@@ -32,8 +30,7 @@ export default async function CoursePage({
   };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const page = Number(searchParams.page ?? 1);
-  console.log({ page });
+  const page = Number(searchParams.page ?? 0);
 
   const session = await getRequiredAuthSession();
 
@@ -89,7 +86,7 @@ export default async function CoursePage({
             <CoursePaginationButton
               baseUrl={`/admin/courses/${course.id}`}
               page={page}
-              totalPage={course._count?.users ?? 0 / 5}
+              className="mt-6"
             />
           </CardContent>
         </Card>

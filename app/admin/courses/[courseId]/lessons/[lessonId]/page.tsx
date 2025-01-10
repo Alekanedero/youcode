@@ -5,42 +5,37 @@ import {
   LayoutTitle,
 } from "@/components/layout/layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getRequiredAuthSession } from "@/lib/auth";
 import { notFound } from "next/navigation";
-import { getCourseLessons } from "./lessons.query";
-import { AdminLessonItem } from "./AdminlessonItem";
+import { getAdminLesson } from "./lesson.query";
+import { getRequiredAuthSession } from "@/lib/auth";
+import { LessonDetailsForm } from "./form/LessonDetailsform";
 
-export default async function CourseLessonsPage({
+export default async function EditLessonsPage({
   params,
 }: {
   params: {
-    courseId: string;
+    lessonId: string;
   };
 }) {
   const session = await getRequiredAuthSession();
-  const course = await getCourseLessons({
-    courseId: params.courseId,
-    userId: session.user.id,
-  });
+  const lesson = await getAdminLesson(params.lessonId, session.user.id);
 
-  if (!course) {
+  if (!lesson) {
     notFound();
   }
 
   return (
     <Layout>
       <LayoutHeader>
-        <LayoutTitle>Lessons · {course.name}</LayoutTitle>
+        <LayoutTitle>{lesson.name}</LayoutTitle>
       </LayoutHeader>
       <LayoutContent className="flex flex-col gap-4 lg:flex-row">
         <Card className="flex-[2]">
           <CardHeader>
-            <CardTitle>Lessons</CardTitle>
+            <CardTitle>Details</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-2">
-            {course.lessons.map((lesson) => (
-              <AdminLessonItem key={lesson.id} lesson={lesson} />
-            ))}
+            <LessonDetailsForm defaultValue={lesson} />
           </CardContent>
         </Card>
       </LayoutContent>

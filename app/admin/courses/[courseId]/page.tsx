@@ -53,8 +53,10 @@ export default async function CoursePage({
           <CardContent>
             <Table>
               <TableHeader>
-                <TableHead>Image</TableHead>
-                <TableHead>Name</TableHead>
+                <TableRow>
+                  <TableHead>Image</TableHead>
+                  <TableHead>Name</TableHead>
+                </TableRow>
               </TableHeader>
               <TableBody>
                 {course.users?.map((user) => (

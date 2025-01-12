@@ -4,7 +4,6 @@ import {
   LayoutHeader,
   LayoutTitle,
 } from "@/components/layout/layout";
-
 import Link from "next/link";
 import React from "react";
 

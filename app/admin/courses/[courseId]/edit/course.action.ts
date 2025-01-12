@@ -4,6 +4,7 @@ import { authenticatedAction } from "@/lib/action";
 import { z } from "zod";
 import { CourseFormSchema } from "./course.schema";
 import { prisma } from "@/lib/prisma";
+import { error } from "console";
 
 const CourseActionEditProps = z.object({
   courseId: z.string(),
@@ -24,6 +25,7 @@ export const courseActionEdit = authenticatedAction
     return {
       message: "Course updated successfully",
       data: course,
+      ServerError: error,
     };
   });
 

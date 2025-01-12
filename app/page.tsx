@@ -5,7 +5,7 @@ export default function Home() {
     <div>
       <Card>
         <CardHeader className="flex justify-center items-center">
-          <CardTitle>Hello les chikens !!</CardTitle>
+          <CardTitle>Bienvenue sur mon site !!</CardTitle>
         </CardHeader>
       </Card>
     </div>

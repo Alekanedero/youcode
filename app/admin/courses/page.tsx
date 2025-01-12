@@ -28,6 +28,7 @@ export default async function CoursesPage() {
       creatorId: session.user.id,
     },
   });
+
   return (
     <Layout>
       <LayoutHeader className="flex flex-row justify-between">

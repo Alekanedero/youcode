@@ -1,14 +1,17 @@
 import {
   Layout,
+  LayoutActions,
   LayoutContent,
   LayoutHeader,
   LayoutTitle,
 } from "@/components/layout/layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getRequiredAuthSession } from "@/lib/auth";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getCourseLessons } from "./lessons.query";
 import { AdminLessonItem } from "./AdminlessonItem";
+import { SubmitButton } from "@/components/form/SubmitButton";
+import { prisma } from "@/lib/prisma";
 
 export default async function CourseLessonsPage({
   params,
@@ -30,8 +33,9 @@ export default async function CourseLessonsPage({
   return (
     <Layout>
       <LayoutHeader>
-        <LayoutTitle>Lessons · {course.name}</LayoutTitle>
+        <LayoutTitle>{course.name}</LayoutTitle>
       </LayoutHeader>
+      <LayoutActions></LayoutActions>
       <LayoutContent className="flex flex-col gap-4 lg:flex-row">
         <Card className="flex-[2]">
           <CardHeader>
@@ -41,6 +45,42 @@ export default async function CourseLessonsPage({
             {course.lessons.map((lesson) => (
               <AdminLessonItem key={lesson.id} lesson={lesson} />
             ))}
+            <form>
+              <SubmitButton
+                size="sm"
+                variant="secondary"
+                className="w-full"
+                formAction={async () => {
+                  "use server";
+
+                  const session = await getRequiredAuthSession();
+
+                  const courseId = params.courseId;
+
+                  //Authorize the user
+                  await prisma.course.findFirstOrThrow({
+                    where: {
+                      creatorId: session.user.id,
+                      id: courseId,
+                    },
+                  });
+
+                  const lesson = await prisma.lesson.create({
+                    data: {
+                      courseId: courseId,
+                      name: "Draft Lesson",
+                      state: "HIDDEN",
+                      rank: "aaaaa",
+                      content: "## Default content",
+                    },
+                  });
+
+                  redirect(`/admin/courses/${courseId}/lessons/${lesson.id}`);
+                }}
+              >
+                Create lesson
+              </SubmitButton>
+            </form>
           </CardContent>
         </Card>
       </LayoutContent>

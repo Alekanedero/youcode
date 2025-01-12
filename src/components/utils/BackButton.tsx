@@ -13,7 +13,7 @@ export const BackButton = (props: ButtonProps) => {
         router.back();
         props?.onClick?.(e);
       }}
-      variant={"outline"}
+      variant={"secondary"}
       size={"sm"}
     />
   );

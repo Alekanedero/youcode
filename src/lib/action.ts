@@ -3,6 +3,11 @@ import { createSafeActionClient } from "next-safe-action";
 
 export class ServerError extends Error {}
 
+export type ActionResult<T> = {
+  data?: T;
+  serverError?: string;
+};
+
 export const action = createSafeActionClient({
   handleServerError: (error) => {
     if (error instanceof ServerError) {
@@ -19,17 +24,15 @@ export const action = createSafeActionClient({
 export const authenticatedAction = action.use(async ({ next }) => {
   const session = await getAuthSession();
   const user = session?.user;
-  const userId = user?.id;
 
-  if (!userId) {
+  if (!user) {
     throw new ServerError("You must be logged in to perform this action.");
   }
 
   return next({
     ctx: {
-      userId,
+      userId: user?.id,
       user,
     },
   });
 });
-//

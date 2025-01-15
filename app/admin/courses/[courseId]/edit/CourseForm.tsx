@@ -47,8 +47,9 @@ export const CourseForm = ({ defaultValue }: CourseFormProps) => {
             data: values,
           });
 
-          if (result) {
-            // toast.success(result.data);
+          if (result?.data) {
+            console.log("update course 2");
+            // toast.success(result.message);
             router.push(`/admin/courses/${defaultValue.id}`);
             router.refresh();
             return;
@@ -61,10 +62,16 @@ export const CourseForm = ({ defaultValue }: CourseFormProps) => {
           return;
         } else {
           console.log("Create course");
-          await courseActionCreate(values);
-          router.push(`/admin/courses`);
-          router.refresh();
-          // Ajoute ici la logique pour créer un cours
+          const result = await courseActionCreate(values);
+          if (result?.data) {
+            // toast.success(result.message);
+            router.push(`/admin/courses`);
+            router.refresh();
+          } else {
+            toast.error("Some error occurred", {
+              // description: result?.serverError,
+            });
+          }
         }
       }}
     >

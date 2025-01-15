@@ -28,3 +28,31 @@ export const LessonActionEditDetails = authenticatedAction
       data: lesson,
     };
   });
+
+const LessonActionEditContentSchema = z.object({
+  lessonId: z.string(),
+  markdown: z.string(),
+});
+
+export const lessonActionEditContent = authenticatedAction
+  .schema(LessonActionEditContentSchema)
+  .action(async ({ parsedInput: { lessonId, markdown }, ctx: { userId } }) => {
+    const lesson = await prisma.lesson.update({
+      where: {
+        id: lessonId,
+        course: {
+          creatorId: userId,
+        },
+      },
+      data: {
+        content: markdown,
+      },
+    });
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    return {
+      message: "Lesson updated successfully",
+      lesson,
+    };
+  });

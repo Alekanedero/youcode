@@ -30,10 +30,10 @@ export default async function CoursePage({
   return (
     <Layout>
       <LayoutHeader>
-        <LayoutTitle>Your Course</LayoutTitle>
+        <LayoutTitle>Course</LayoutTitle>
       </LayoutHeader>
       <LayoutContent>
-        <Course course={course} />
+        <Course course={course} userId={session?.user.id} />
       </LayoutContent>
     </Layout>
   );

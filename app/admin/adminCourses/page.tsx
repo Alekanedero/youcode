@@ -6,14 +6,8 @@ import {
   LayoutTitle,
 } from "@/components/layout/layout";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -25,7 +19,6 @@ import {
 import { Typography } from "@/components/ui/typography";
 import { getRequiredAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { Menu } from "lucide-react";
 import Link from "next/link";
 
 export default async function CoursesPage() {
@@ -47,7 +40,7 @@ export default async function CoursesPage() {
             size: "sm",
             variant: "secondary",
           })} `}
-          href="/admin/courses/new"
+          href="/admin/adminCourses/new"
         >
           New course
         </Link>
@@ -77,7 +70,7 @@ export default async function CoursesPage() {
                       <Typography
                         as={Link}
                         variant="large"
-                        href={`/admin/courses/${course.id}`}
+                        href={`/admin/adminCourses/${course.id}`}
                       >
                         {course.name}
                       </Typography>

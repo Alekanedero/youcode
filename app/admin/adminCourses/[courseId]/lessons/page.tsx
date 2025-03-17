@@ -73,7 +73,9 @@ export default async function CourseLessonsPage({
                     },
                   });
 
-                  redirect(`/admin/courses/${courseId}/lessons/${lesson.id}`);
+                  redirect(
+                    `/admin/adminCourses/${courseId}/lessons/${lesson.id}`
+                  );
                 }}
               >
                 Create lesson

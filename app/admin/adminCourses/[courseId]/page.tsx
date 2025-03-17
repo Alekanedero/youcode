@@ -141,7 +141,9 @@ export default async function CoursePage({
                                     },
                                   });
 
-                                  revalidatePath(`/admin/courses/${courseId}`);
+                                  revalidatePath(
+                                    `/admin/adminCourses/${courseId}`
+                                  );
                                 }}
                               >
                                 {user.canceled ? "Active" : "Canceled"}
@@ -156,7 +158,7 @@ export default async function CoursePage({
               </TableBody>
             </Table>
             <CoursePaginationButton
-              baseUrl={`/admin/courses/${course.id}`}
+              baseUrl={`/admin/adminCourses/${course.id}`}
               page={page}
               className="mt-6"
             />
@@ -176,7 +178,7 @@ export default async function CoursePage({
             <Typography>{course._count?.users} users</Typography>
             <Typography>{course._count?.lessons} lessons</Typography>
             <Link
-              href={`/admin/courses/${course.id}/edit`}
+              href={`/admin/adminCourses/${course.id}/edit`}
               className={buttonVariants({
                 variant: "outline",
               })}
@@ -184,7 +186,7 @@ export default async function CoursePage({
               Edit
             </Link>
             <Link
-              href={`/admin/courses/${course.id}/lessons`}
+              href={`/admin/adminCourses/${course.id}/lessons`}
               className={buttonVariants({
                 variant: "outline",
               })}

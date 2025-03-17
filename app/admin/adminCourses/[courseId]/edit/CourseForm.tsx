@@ -50,7 +50,7 @@ export const CourseForm = ({ defaultValue }: CourseFormProps) => {
           if (result?.data) {
             console.log("update course 2");
             // toast.success(result.message);
-            router.push(`/admin/courses/${defaultValue.id}`);
+            router.push(`/admin/adminCourses/${defaultValue.id}`);
             router.refresh();
             return;
           } else {
@@ -65,7 +65,7 @@ export const CourseForm = ({ defaultValue }: CourseFormProps) => {
           const result = await courseActionCreate(values);
           if (result?.data) {
             // toast.success(result.message);
-            router.push(`/admin/courses`);
+            router.push(`/admin/adminCourses`);
             router.refresh();
           } else {
             toast.error("Some error occurred", {

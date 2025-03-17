@@ -14,7 +14,7 @@ export default function AdminPage() {
         <LayoutTitle>Courses</LayoutTitle>
       </LayoutHeader>
       <LayoutContent>
-        <Link href="/admin/courses">Courses</Link>
+        <Link href="/admin/adminCourses">Courses</Link>
       </LayoutContent>
     </Layout>
   );

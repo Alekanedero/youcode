@@ -12,6 +12,9 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { LessonsNavigation } from "./LessonsNavigation";
 import { Lesson } from "./Lesson";
+import { Suspense } from "react";
+import { LessonsNavigationSkeleton } from "./LessonsNavigationSkeleton";
+import { LessonSkeleton } from "./LessonSkeleton";
 
 export default async function LessonPage({
   params,
@@ -64,8 +67,12 @@ export default async function LessonPage({
 
   return (
     <div className="flex items-start gap-4 p-4">
-      <LessonsNavigation courseId={params.courseId} />
-      <Lesson lesson={lesson} />
+      <Suspense fallback={<LessonsNavigationSkeleton />}>
+        <LessonsNavigation courseId={params.courseId} />
+      </Suspense>
+      <Suspense fallback={<LessonSkeleton />}>
+        <Lesson {...params} />
+      </Suspense>
     </div>
   );
 }

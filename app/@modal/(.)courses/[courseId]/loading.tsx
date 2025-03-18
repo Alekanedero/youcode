@@ -4,7 +4,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { CoursePlaceholder } from "../../../courses/[courseId]/CoursePlaceholder";
+import { CourseSkeleton } from "../../../courses/[courseId]/CourseSkeleton";
 
 export default function CourseDialogLoading() {
   return (
@@ -13,7 +13,7 @@ export default function CourseDialogLoading() {
         <DialogHeader>
           <DialogTitle>Loading...</DialogTitle>
         </DialogHeader>
-        <CoursePlaceholder />
+        <CourseSkeleton />
       </DialogContent>
     </Dialog>
   );

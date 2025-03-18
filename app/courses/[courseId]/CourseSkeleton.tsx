@@ -2,9 +2,9 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader } from "@/components/ui/Loader";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LessonItemPlaceholder } from "./lessons/[lessonId]/LessonItemPlaceholder";
+import { LessonItemSkeleton } from "./lessons/[lessonId]/LessonItemSkeleton";
 
-export const CoursePlaceholder = () => {
+export const CourseSkeleton = () => {
   return (
     <div className="flex flex-col items-start gap-4">
       <div className="flex w-full flex-col items-start gap-4 lg:flex-row">
@@ -40,7 +40,7 @@ export const CoursePlaceholder = () => {
           </CardHeader>
           <CardContent className="flex flex-col gap-2">
             {Array.from({ length: 5 }).map((_, i) => (
-              <LessonItemPlaceholder key={i} />
+              <LessonItemSkeleton key={i} />
             ))}
           </CardContent>
         </Card>

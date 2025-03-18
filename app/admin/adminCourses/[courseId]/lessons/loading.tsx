@@ -4,16 +4,16 @@ import {
   LayoutHeader,
   LayoutTitle,
 } from "@/components/layout/layout";
-import { CourseSkeleton } from "./CourseSkeleton";
+import { Loader } from "@/components/ui/Loader";
 
-export default async function CourseSkeletonPage() {
+export default function loading() {
   return (
     <Layout>
       <LayoutHeader>
-        <LayoutTitle>Your courses</LayoutTitle>
+        <LayoutTitle>Loading...</LayoutTitle>
       </LayoutHeader>
       <LayoutContent>
-        <CourseSkeleton />
+        <Loader size={32} />
       </LayoutContent>
     </Layout>
   );

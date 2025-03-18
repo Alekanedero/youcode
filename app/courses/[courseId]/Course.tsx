@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
@@ -57,7 +58,7 @@ export const Course = ({ course, userId }: CourseProps) => {
           </CardContent>
         </Card>
       </div>
-
+      {course.isCanceled ? <p>You can't join this course.</p> : null}
       {!course.isEnrolled && !course.isCanceled && isLogin ? (
         <div>
           <form>

@@ -27,5 +27,4 @@ export const getCourses = async (userId?: string) => {
     },
   });
 };
-
 export type CoursesCard = Prisma.PromiseReturnType<typeof getCourses>[number];

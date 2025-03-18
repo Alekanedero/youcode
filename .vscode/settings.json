@@ -16,8 +16,30 @@
     "*.md": "vscode.markdown.preview.editor"
   },
   "workbench.colorCustomizations": {
-    "tree.indentGuidesStroke": "#fdfdfd"
+    // EXPLORATEUR DE FICHIER
+    "tree.indentGuidesStroke": "#fdfdfd", //Couleur des guides actifs
+    "tree.inactiveIndentGuidesStroke": "#323333", // Couleur des guides inactifs
+
+    // "sideBar.background": "#1E1E1E", // Couleur de fond
+    // "sideBar.foreground": "#D4D4D4", // Couleur du texte
+    // "sideBar.border": "#303030", // Couleur de la bordure
+    // "sideBarSectionHeader.background": "#252526", // Fond des titres (ex: "EXPLORER")
+    // "sideBarSectionHeader.foreground": "#FFFFFF", // Texte des titres
+    // "list.activeSelectionBackground": "#007ACC", // Fond de l'élément sélectionné
+    // "list.activeSelectionForeground": "#691a1a", // Texte de l'élément sélectionné
+    "list.inactiveSelectionBackground": "#3A3D41", // Fond de l'élément non actif
+    // "list.inactiveSelectionForeground": "#8b2b2b", // Texte de l'élément non actif
+
+    // EDITEUR DE TEXTE
+
+    // "editor.background": "#1E1E1E", // Couleur de fond
+    // "editor.foreground": "#D4D4D4", // Couleur du texte
+    "editorIndentGuide.background1": "#444444", // Couleur des guides inactifs
+    "editorIndentGuide.activeBackground1": "#FFFFFF" // Couleur des guides actifs
   },
+
+  "workbench.editor.enablePreview": false,
+
   "workbench.startupEditor": "none",
   "workbench.tree.indent": 14,
 
@@ -26,6 +48,12 @@
     "editor.suggestSelection": "recentlyUsed",
     "editor.suggest.showKeywords": false
   },
+
+  // MATERIAL ICON THEME
+
+  "material-icon-theme.hidesExplorerArrows": true, // Affiche ou masque les flèches d'exploration
+  "material-icon-theme.folders.theme": "specific", // Thème des dossiers
+  "material-icon-theme.folders.color": "#90a4ae", // Couleur des dossiers
 
   "files.exclude": {
     "USE_GITIGNORE": true

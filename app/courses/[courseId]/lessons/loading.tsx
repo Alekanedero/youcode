@@ -1,4 +1,4 @@
-import { LessonsNavigationSkeleton } from "./[lessonId]/LessonsNavigationSkeleton";
+import { LessonsNavigationSkeleton } from "./LessonsNavigationSkeleton";
 
 export default function LessonLoading() {
   return (

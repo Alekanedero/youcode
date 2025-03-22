@@ -1,8 +1,8 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Loader } from "@/components/ui/Loader";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LessonItemSkeleton } from "./lessons/[lessonId]/LessonItemSkeleton";
+import { LessonsNavigationSkeleton } from "./lessons/LessonsNavigationSkeleton";
 
 export const CourseSkeleton = () => {
   return (
@@ -34,16 +34,7 @@ export const CourseSkeleton = () => {
             <Skeleton className="h-5 w-1/2" />
           </CardContent>
         </Card>
-        <Card className="flex-1">
-          <CardHeader>
-            <CardTitle>Lessons</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-2">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <LessonItemSkeleton key={i} />
-            ))}
-          </CardContent>
-        </Card>
+        <LessonsNavigationSkeleton />
       </div>
     </div>
   );

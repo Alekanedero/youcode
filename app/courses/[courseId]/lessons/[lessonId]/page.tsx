@@ -19,6 +19,7 @@ import {
   LayoutTitle,
 } from "@/components/layout/layout";
 import Link from "next/link";
+import { OpenLessonNavigationButton } from "./OpenLessonNavigationButton";
 import { buttonVariants } from "@/components/ui/button";
 
 export default async function LessonPage({
@@ -80,7 +81,8 @@ export default async function LessonPage({
   return (
     <div className="flex-1">
       <Card>
-        <CardHeader>
+        <CardHeader className="flex-row items-center space-y-0 gap-2">
+          <OpenLessonNavigationButton />
           <CardTitle>{lesson.name}</CardTitle>
         </CardHeader>
         <CardContent className="">

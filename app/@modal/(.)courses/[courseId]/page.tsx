@@ -5,7 +5,7 @@ import { getCourse } from "../../../courses/[courseId]/course.query";
 import { CourseDialog } from "./CourseDialog";
 
 export default async function CoursePage({
-  params,
+  params: { courseId },
 }: {
   params: {
     courseId: string;
@@ -13,7 +13,7 @@ export default async function CoursePage({
 }) {
   const session = await getAuthSession();
   const course = await getCourse({
-    courseId: params.courseId,
+    courseId: courseId,
     userId: session?.user.id,
   });
 

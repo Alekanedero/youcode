@@ -12,6 +12,7 @@ import { getCourseLessons } from "./lessons.query";
 import { SubmitButton } from "@/components/form/SubmitButton";
 import { prisma } from "@/lib/prisma";
 import { AdminLessonSortable } from "./AdminLessonSortable";
+import { getTheMiddleRank } from "@/lib/getTheMiddleRank";
 
 export default async function CourseLessonsPage({
   params,
@@ -63,12 +64,20 @@ export default async function CourseLessonsPage({
                     },
                   });
 
+                  // Récupérer le rang le plus élevé actuel des leçons
+                  const lastLesson = await prisma.lesson.findFirst({
+                    where: { courseId: courseId },
+                    orderBy: { rank: "desc" },
+                  });
+
+                  const newRank = getTheMiddleRank(lastLesson?.rank, undefined);
+
                   const lesson = await prisma.lesson.create({
                     data: {
                       courseId: courseId,
                       name: "Draft Lesson",
                       state: "HIDDEN",
-                      rank: "aaaaa",
+                      rank: newRank,
                       content: "## Default content",
                     },
                   });

@@ -17,17 +17,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Typography } from "@/components/ui/typography";
-import { getRequiredAuthSession } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { getAdminCourses } from "./courseAdmin.query";
 
 export default async function CoursesPage() {
-  const session = await getRequiredAuthSession();
-  const courses = await prisma.course.findMany({
-    where: {
-      creatorId: session.user.id,
-    },
-  });
+  const courses = await getAdminCourses();
 
   return (
     <Layout>

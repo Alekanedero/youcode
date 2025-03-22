@@ -38,7 +38,8 @@
     "editorIndentGuide.activeBackground1": "#FFFFFF" // Couleur des guides actifs
   },
 
-  "workbench.editor.enablePreview": false,
+  // Ouvrir dans un nouvel onglet
+  "workbench.editor.enablePreview": true,
 
   "workbench.startupEditor": "none",
   "workbench.tree.indent": 14,

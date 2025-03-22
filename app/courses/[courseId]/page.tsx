@@ -11,7 +11,7 @@ import { notFound } from "next/navigation";
 import { Course } from "./Course";
 
 export default async function CoursePage({
-  params,
+  params: { courseId },
 }: {
   params: {
     courseId: string;
@@ -19,7 +19,7 @@ export default async function CoursePage({
 }) {
   const session = await getAuthSession();
   const course = await getCourse({
-    courseId: params.courseId,
+    courseId: courseId,
     userId: session?.user.id,
   });
 

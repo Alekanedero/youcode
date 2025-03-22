@@ -4,12 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
 import { MarkdownProse } from "@/features/mdx/MarkdownProse";
 import { CourseType } from "./course.query";
-import { LessonItem } from "./lessons/[lessonId]/LessonItem";
+
 import { SubmitButton } from "@/components/form/SubmitButton";
 import { prisma } from "@/lib/prisma";
 import { getRequiredAuthSession } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { LessonNavigationItem } from "./lessons/[lessonId]/LessonNavigationItem";
 
 export type CourseProps = {
   course: CourseType;
@@ -53,7 +54,7 @@ export const Course = ({ course, userId }: CourseProps) => {
           </CardHeader>
           <CardContent className="flex flex-col gap-2">
             {course.lessons.map((lesson) => (
-              <LessonItem lesson={lesson} key={lesson.id} />
+              <LessonNavigationItem lesson={lesson} key={lesson.id} />
             ))}
           </CardContent>
         </Card>

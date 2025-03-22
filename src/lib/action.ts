@@ -21,6 +21,7 @@ export const action = createSafeActionClient({
   },
 });
 
+// Ce middleware garantit que seules les requêtes effectuées par un utilisateur connecté pourront exécuter certaines actions.
 export const authenticatedAction = action.use(async ({ next }) => {
   const session = await getAuthSession();
   const user = session?.user;

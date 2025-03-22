@@ -25,6 +25,7 @@ import {
 export type LessonDetailsFormProps = {
   defaultValue: LessonDetailsSchema & {
     id: string;
+    courseId: string;
   };
 };
 
@@ -53,7 +54,9 @@ export const LessonDetailsForm = ({ defaultValue }: LessonDetailsFormProps) => {
               data: values,
             });
           }
+
           if (result) {
+            router.push(`/admin/adminCourses/${defaultValue.courseId}/lessons`);
             router.refresh();
           }
         } catch (error) {

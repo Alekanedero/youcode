@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Loader } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 
 export const CourseCardSkeleton = () => {
   return (
@@ -9,7 +9,7 @@ export const CourseCardSkeleton = () => {
       <CardHeader className="flex flex-row gap-5 space-y-0 items-center">
         <Avatar className="h-14 w-14 rounded">
           <AvatarFallback>
-            <Loader size={24} />
+            <LoaderCircle size={24} className="animate-spin" />
           </AvatarFallback>
         </Avatar>
 
@@ -18,7 +18,7 @@ export const CourseCardSkeleton = () => {
           <div className="flex flex-row gap-2">
             <Avatar className="h-8 w-8">
               <AvatarFallback>
-                <Loader size={24} />
+                <LoaderCircle size={24} className="animate-spin" />
               </AvatarFallback>
             </Avatar>
             <Skeleton className="h-9 w-20" />

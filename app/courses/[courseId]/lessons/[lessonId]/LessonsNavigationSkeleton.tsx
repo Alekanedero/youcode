@@ -1,6 +1,15 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LessonItemPlaceholder } from "./LessonItemSkeleton";
+import { CircleDashed } from "lucide-react";
+
+const LessonItemSkeleton = () => {
+  return (
+    <div className="flex items-center gap-3 rounded border border-border bg-card px-4 py-2 transition-colors hover:bg-accent">
+      <CircleDashed size={16} />
+      <Skeleton className="h-6 w-full" />
+    </div>
+  );
+};
 
 export const LessonsNavigationSkeleton = () => {
   return (
@@ -10,7 +19,7 @@ export const LessonsNavigationSkeleton = () => {
       </CardHeader>
       <CardContent className="flex flex-col gap-2">
         {Array.from({ length: 5 }).map((_, i) => (
-          <LessonItemPlaceholder key={i} />
+          <LessonItemSkeleton key={i} />
         ))}
       </CardContent>
     </Card>

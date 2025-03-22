@@ -7,6 +7,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import { useRouter } from "next/router";
 
 export type LessonItemProps = {
   lesson: AdminLessonItemType;
@@ -14,6 +15,9 @@ export type LessonItemProps = {
 };
 
 export const AdminLessonItem = ({ lesson }: LessonItemProps) => {
+  const router = useRouter();
+  router.reload();
+
   return (
     <div>
       <Link

@@ -32,7 +32,7 @@ import { revalidatePath } from "next/cache";
 import { Badge } from "@/components/ui/badge";
 
 export default async function CoursePage({
-  params,
+  params: { courseId },
   searchParams,
 }: {
   params: {
@@ -42,7 +42,6 @@ export default async function CoursePage({
 }) {
   const page = Number(searchParams.page ?? 0);
   const session = await getRequiredAuthSession();
-  const { courseId } = params;
 
   const course = await getAdminCourse({
     courseId,
@@ -114,7 +113,7 @@ export default async function CoursePage({
                                   "use server";
                                   const session =
                                     await getRequiredAuthSession();
-                                  const courseId = params.courseId;
+
                                   const userId = user.id;
 
                                   const courseOnUser =

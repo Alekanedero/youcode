@@ -1,4 +1,5 @@
 export const SiteConfig = {
   title: "Youcode",
-  description: "You JUST need to CODE.",
+  description:
+    "Learn to code faster with an online learning experience like no other.",
 } as const;

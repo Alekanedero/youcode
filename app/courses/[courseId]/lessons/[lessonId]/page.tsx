@@ -1,23 +1,28 @@
+import { getAuthSession } from "@/lib/auth";
+import { getLesson } from "./lesson.query";
+import { notFound } from "next/navigation";
+import { prisma } from "@/lib/prisma";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+// import { MdxProse } from "./MdxProse";
+import { SubmitButton } from "@/components/form/SubmitButton";
+import { handleLessonState } from "./lesson.action";
 import {
   Layout,
   LayoutContent,
   LayoutHeader,
   LayoutTitle,
 } from "@/components/layout/layout";
-import { getAuthSession } from "@/lib/auth";
-import { getLesson } from "./lesson.query";
-import { notFound } from "next/navigation";
-import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-import { LessonsNavigation } from "./LessonsNavigation";
-import { Lesson } from "./Lesson";
-import { Suspense } from "react";
-import { LessonsNavigationSkeleton } from "./LessonsNavigationSkeleton";
-import { LessonSkeleton } from "./LessonSkeleton";
 
 export default async function LessonPage({
-  params,
+  params: { courseId, lessonId },
 }: {
   params: {
     courseId: string;
@@ -25,15 +30,16 @@ export default async function LessonPage({
   };
 }) {
   const session = await getAuthSession();
-  const lesson = await getLesson(params.lessonId, session?.user.id);
+  const lesson = await getLesson(lessonId, session?.user.id);
 
   if (!lesson) {
     notFound();
   }
 
-  const isAutorized = await prisma.course.findUnique({
+  //Cette fonction vérifie si un user est inscrit à un cours et si son inscription n'est pas annulée.
+  const isAuthorized = await prisma.course.findUnique({
     where: {
-      id: params.courseId,
+      id: courseId,
     },
     select: {
       users: {
@@ -45,19 +51,16 @@ export default async function LessonPage({
     },
   });
 
-  if (lesson.state !== "PUBLIC" && !isAutorized?.users.length) {
+  if (lesson.state !== "PUBLIC" && !isAuthorized?.users.length) {
     return (
       <Layout>
         <LayoutHeader>
           <LayoutTitle>
-            You need to be enrolled in this course to view this lesson.
+            You need to be enrolled in htis course to view this lesson
           </LayoutTitle>
         </LayoutHeader>
         <LayoutContent>
-          <Link
-            href={`/courses/${params.courseId}`}
-            className={buttonVariants()}
-          >
+          <Link href={`/courses/${courseId}`} className={buttonVariants()}>
             Join now
           </Link>
         </LayoutContent>
@@ -65,14 +68,50 @@ export default async function LessonPage({
     );
   }
 
+  if (lesson.users.length === 0 && session?.user.id) {
+    await prisma.lessonOnUser.create({
+      data: {
+        userId: session?.user.id,
+        lessonId: lesson.id,
+      },
+    });
+  }
+
   return (
-    <div className="flex items-start gap-4 p-4">
-      <Suspense fallback={<LessonsNavigationSkeleton />}>
-        <LessonsNavigation courseId={params.courseId} />
-      </Suspense>
-      <Suspense fallback={<LessonSkeleton />}>
-        <Lesson {...params} />
-      </Suspense>
+    <div className="flex-1">
+      <Card>
+        <CardHeader>
+          <CardTitle>{lesson.name}</CardTitle>
+        </CardHeader>
+        <CardContent className="">
+          {/* <MdxProse markdown={lesson.content} /> */}
+          {lesson.content}
+        </CardContent>
+        <CardFooter>
+          <form className="ml-auto max-w-2xl flex flex-row-reverse">
+            <SubmitButton
+              size="sm"
+              formAction={async () => {
+                "use server";
+
+                await handleLessonState({
+                  input: {
+                    lessonId: lesson.id,
+                    progress:
+                      lesson.progress === "COMPLETED"
+                        ? "IN_PROGRESS"
+                        : "COMPLETED",
+                  },
+                });
+              }}
+            >
+              {lesson.progress === "COMPLETED"
+                ? "Mark as in progress"
+                : "Completed"}
+            </SubmitButton>
+          </form>
+        </CardFooter>
+      </Card>
     </div>
   );
 }

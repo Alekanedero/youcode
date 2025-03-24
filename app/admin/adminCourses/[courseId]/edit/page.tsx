@@ -10,7 +10,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { CourseForm } from "./CourseForm";
 
-export default async function CoursePage({
+export default async function EditPage({
   params,
 }: {
   params: {
@@ -29,6 +29,7 @@ export default async function CoursePage({
       image: true,
       name: true,
       presentation: true,
+      state: true,
     },
   });
 

@@ -19,6 +19,8 @@ import {
 import { Typography } from "@/components/ui/typography";
 import Link from "next/link";
 import { getAdminCourses } from "./courseAdmin.query";
+import { ArrowRightToLine } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default async function CoursesPage() {
   const courses = await getAdminCourses();
@@ -47,30 +49,52 @@ export default async function CoursesPage() {
                 <TableRow>
                   <TableHead>Image</TableHead>
                   <TableHead>Name</TableHead>
+                  <TableHead>State</TableHead>
+                  <TableHead>Update</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {courses.map((course) => (
-                  <TableRow key={course.id}>
-                    <TableCell>
-                      <Avatar className="rounded">
-                        <AvatarFallback>{course.name[0]}</AvatarFallback>
-                        {course.image && (
-                          <AvatarImage src={course.image} alt={course.name} />
-                        )}
-                      </Avatar>
-                    </TableCell>
-                    <TableCell>
-                      <Typography
-                        as={Link}
-                        variant="large"
-                        href={`/admin/adminCourses/${course.id}`}
-                      >
-                        {course.name}
-                      </Typography>
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {courses
+                  .sort(
+                    (a, b) =>
+                      new Date(b.createdAt).getTime() -
+                      new Date(a.createdAt).getTime()
+                  )
+                  .map((course) => (
+                    <TableRow key={course.id}>
+                      <TableCell>
+                        <Avatar className="rounded">
+                          <AvatarFallback>{course.name[0]}</AvatarFallback>
+                          {course.image && (
+                            <AvatarImage src={course.image} alt={course.name} />
+                          )}
+                        </Avatar>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="large">{course.name}</Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography
+                          className={cn("text-red-300", {
+                            "text-green-500": course.state === "PUBLISHED",
+                          })}
+                        >
+                          {course.state}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Link
+                          className={buttonVariants({
+                            size: "sm",
+                            variant: "secondary",
+                          })}
+                          href={`/admin/adminCourses/${course.id}`}
+                        >
+                          <ArrowRightToLine size={20} />
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </CardContent>

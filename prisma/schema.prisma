@@ -66,11 +66,17 @@ model User {
   lessons        LessonOnUser[]
 }
 
+enum CourseState {
+  DRAFT
+  PUBLISHED
+}
+
 model Course {
   id            String @id @default(cuid())
   name          String
   presentation  String // markdown
   image         String
+  state         CourseState @default(DRAFT)
   createdAt     DateTime @default(now())
   creatorId     String
 

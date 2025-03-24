@@ -17,7 +17,15 @@ export function Header() {
           <Typography variant="h3" as={Link} href="/">
             {SiteConfig.title}
           </Typography>
-          <div className="flex gap-2 ml-6">
+          <div className="flex gap-4 ml-6">
+            <Typography
+              variant="link"
+              as={Link}
+              href="/"
+              className="text-muted-foreground hover:text-foreground"
+            >
+              Portefolio
+            </Typography>
             <Typography
               variant="link"
               as={Link}

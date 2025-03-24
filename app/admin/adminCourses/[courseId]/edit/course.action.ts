@@ -47,6 +47,10 @@ export const courseActionCreate = authenticatedAction
       ctx: { userId },
     }): Promise<ActionResult<typeof data>> => {
       try {
+        if (!userId) {
+          throw new Error("User ID is required");
+        }
+
         const courseData = {
           ...data,
           creatorId: userId,

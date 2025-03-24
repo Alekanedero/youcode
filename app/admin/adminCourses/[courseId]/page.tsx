@@ -30,6 +30,8 @@ import { Menu } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { Badge } from "@/components/ui/badge";
+import { SubmitButton } from "@/components/form/SubmitButton";
+import { toggleAdminCourseState } from "./admin-course.action";
 
 export default async function CoursePage({
   params: { courseId },
@@ -48,6 +50,10 @@ export default async function CoursePage({
     userId: session.user.id,
     userPage: page,
   });
+
+  if (!courseId) {
+    return null;
+  }
 
   return (
     <Layout>
@@ -70,7 +76,7 @@ export default async function CoursePage({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {course.users?.map((user) => (
+                {course?.users?.map((user) => (
                   <TableRow key={user.id}>
                     <TableCell>
                       <Avatar className="rounded">
@@ -156,24 +162,81 @@ export default async function CoursePage({
                 ))}
               </TableBody>
             </Table>
-            <CoursePaginationButton
-              baseUrl={`/admin/adminCourses/${course.id}`}
-              page={page}
-              className="mt-6"
-            />
+            {course && (
+              <CoursePaginationButton
+                baseUrl={`/admin/adminCourses/${course.id}`}
+                page={page}
+                className="mt-6"
+              />
+            )}
           </CardContent>
         </Card>
+
+        {/* course actuel */}
+
         <Card className="flex-1">
           <CardHeader className="flex-row items-center gap-4 space-y-0">
             <Avatar className="rounded">
-              <AvatarFallback>{course.name?.[0]}</AvatarFallback>
+              <AvatarFallback>{course?.name?.[0]}</AvatarFallback>
               {course.image && (
                 <AvatarImage src={course.image} alt={course.name ?? ""} />
               )}
             </Avatar>
-            <CardTitle>{course.name}</CardTitle>
+            <CardTitle>{course?.name}</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-1">
+            {/* <form>
+              <SubmitButton
+                size="sm"
+                className="w-auto"
+                formAction={async () => {
+                  "use server";
+
+                  const session = await getRequiredAuthSession();
+                  const userId = session.user.id;
+
+                  if (!userId) {
+                    throw new Error("User is not auhtentificated.");
+                  }
+
+                  const courseState = course.state;
+
+                  if (!courseState) {
+                    throw new Error("Course not found or not authorized.");
+                  }
+
+                  // inverting the state
+                  const newState =
+                    courseState === "DRAFT" ? "PUBLISHED" : "DRAFT";
+
+                  await prisma.course.update({
+                    where: { id: courseId, creatorId: userId },
+                    data: { state: newState },
+                  });
+
+                  revalidatePath(`/admin/adminCourses/${courseId}`);
+                }}
+              >
+                {course.state}
+              </SubmitButton>
+            </form> */}
+            <form>
+              <SubmitButton
+                size="sm"
+                className="w-auto"
+                formAction={async () => {
+                  "use server";
+
+                  await toggleAdminCourseState({
+                    courseId: course.id,
+                    state: course.state,
+                  });
+                }}
+              >
+                {course.state}
+              </SubmitButton>
+            </form>
+
             <Typography>{course._count?.users} users</Typography>
             <Typography>{course._count?.lessons} lessons</Typography>
             <Link

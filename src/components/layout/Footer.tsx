@@ -12,7 +12,7 @@ export const Footer = () => {
             <Image
               src="/images/logo.svg"
               width={40}
-              height={30}
+              height={40}
               alt="app logo"
             />
             <Typography variant="base" as={Link} href="/">
@@ -36,7 +36,7 @@ export const Footer = () => {
         </div>
         <div className="flex w-full items-center justify-center">
           <Typography variant="base" className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} YouCode
+            &copy; 2025 YouCode
           </Typography>
         </div>
       </div>

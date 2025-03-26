@@ -49,8 +49,6 @@ export const lessonActionEditContent = authenticatedAction
       },
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
     return {
       message: "Lesson updated successfully",
       lesson,

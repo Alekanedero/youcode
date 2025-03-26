@@ -14,14 +14,14 @@ export default async function EditPage({
   params,
 }: {
   params: {
-    courseId: string;
+    adminCourseId: string;
   };
 }) {
   const session = await getRequiredAuthSession();
 
   const course = await prisma.course.findUnique({
     where: {
-      id: params.courseId,
+      id: params.adminCourseId,
       creatorId: session.user.id,
     },
     select: {

@@ -4,7 +4,7 @@ import { Course } from "../../../courses/[courseId]/Course";
 import { getCourse } from "../../../courses/[courseId]/course.query";
 import { CourseDialog } from "./CourseDialog";
 
-export default async function CoursePage({
+export default async function ModalCoursePage({
   params: { courseId },
 }: {
   params: {

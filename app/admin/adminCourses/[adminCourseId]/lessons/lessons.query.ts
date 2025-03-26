@@ -2,15 +2,15 @@ import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 
 export const getCourseLessons = async ({
-  courseId,
+  adminCourseId,
   userId,
 }: {
-  courseId: string;
+  adminCourseId: string;
   userId: string;
 }) => {
   return await prisma.course.findFirst({
     where: {
-      id: courseId,
+      id: adminCourseId,
       creatorId: userId,
     },
 

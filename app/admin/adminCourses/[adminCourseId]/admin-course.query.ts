@@ -1,18 +1,18 @@
 import { prisma } from "@/lib/prisma";
 
 export const getAdminCourse = async ({
-  courseId,
+  adminCourseId,
   userId,
   userPage,
 }: {
-  courseId: string;
+  adminCourseId: string;
   userId: string;
   userPage: number;
 }) => {
   const courses = await prisma.course.findUnique({
     where: {
       creatorId: userId,
-      id: courseId,
+      id: adminCourseId,
     },
     select: {
       id: true,

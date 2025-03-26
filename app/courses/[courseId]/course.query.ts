@@ -56,7 +56,6 @@ export const getCourse = async ({
           image: true,
         },
       },
-
       _count: {
         select: {
           lessons: true,

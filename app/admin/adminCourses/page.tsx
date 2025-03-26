@@ -22,7 +22,7 @@ import { getAdminCourses } from "./courseAdmin.query";
 import { ArrowRightToLine } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export default async function CoursesPage() {
+export default async function AdminCoursesPage() {
   const courses = await getAdminCourses();
 
   return (

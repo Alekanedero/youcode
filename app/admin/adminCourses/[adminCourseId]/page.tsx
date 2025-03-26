@@ -33,12 +33,12 @@ import { Badge } from "@/components/ui/badge";
 import { SubmitButton } from "@/components/form/SubmitButton";
 import { toggleAdminCourseState } from "./admin-course.action";
 
-export default async function CoursePage({
-  params: { courseId },
+export default async function AdminCoursePage({
+  params: { adminCourseId },
   searchParams,
 }: {
   params: {
-    courseId: string;
+    adminCourseId: string;
   };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
@@ -46,12 +46,12 @@ export default async function CoursePage({
   const session = await getRequiredAuthSession();
 
   const course = await getAdminCourse({
-    courseId,
+    adminCourseId,
     userId: session.user.id,
     userPage: page,
   });
 
-  if (!courseId) {
+  if (!adminCourseId) {
     return null;
   }
 
@@ -117,9 +117,9 @@ export default async function CoursePage({
                                 className="w-full"
                                 formAction={async () => {
                                   "use server";
+
                                   const session =
                                     await getRequiredAuthSession();
-
                                   const userId = user.id;
 
                                   const courseOnUser =
@@ -127,7 +127,7 @@ export default async function CoursePage({
                                       where: {
                                         userId,
                                         course: {
-                                          id: courseId,
+                                          id: adminCourseId,
                                           creatorId: session.user.id,
                                         },
                                       },
@@ -147,7 +147,7 @@ export default async function CoursePage({
                                   });
 
                                   revalidatePath(
-                                    `/admin/adminCourses/${courseId}`
+                                    `/admin/adminCourses/${adminCourseId}`
                                   );
                                 }}
                               >
@@ -171,9 +171,6 @@ export default async function CoursePage({
             )}
           </CardContent>
         </Card>
-
-        {/* course actuel */}
-
         <Card className="flex-1">
           <CardHeader className="flex-row items-center gap-4 space-y-0">
             <Avatar className="rounded">
@@ -185,41 +182,6 @@ export default async function CoursePage({
             <CardTitle>{course?.name}</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-1">
-            {/* <form>
-              <SubmitButton
-                size="sm"
-                className="w-auto"
-                formAction={async () => {
-                  "use server";
-
-                  const session = await getRequiredAuthSession();
-                  const userId = session.user.id;
-
-                  if (!userId) {
-                    throw new Error("User is not auhtentificated.");
-                  }
-
-                  const courseState = course.state;
-
-                  if (!courseState) {
-                    throw new Error("Course not found or not authorized.");
-                  }
-
-                  // inverting the state
-                  const newState =
-                    courseState === "DRAFT" ? "PUBLISHED" : "DRAFT";
-
-                  await prisma.course.update({
-                    where: { id: courseId, creatorId: userId },
-                    data: { state: newState },
-                  });
-
-                  revalidatePath(`/admin/adminCourses/${courseId}`);
-                }}
-              >
-                {course.state}
-              </SubmitButton>
-            </form> */}
             <form>
               <SubmitButton
                 size="sm"
@@ -228,7 +190,7 @@ export default async function CoursePage({
                   "use server";
 
                   await toggleAdminCourseState({
-                    courseId: course.id,
+                    adminCourseId: course.id,
                     state: course.state,
                   });
                 }}
@@ -236,7 +198,6 @@ export default async function CoursePage({
                 {course.state}
               </SubmitButton>
             </form>
-
             <Typography>{course._count?.users} users</Typography>
             <Typography>{course._count?.lessons} lessons</Typography>
             <Link

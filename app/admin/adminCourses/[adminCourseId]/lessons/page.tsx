@@ -18,12 +18,12 @@ export default async function CourseLessonsPage({
   params,
 }: {
   params: {
-    courseId: string;
+    adminCourseId: string;
   };
 }) {
   const session = await getRequiredAuthSession();
   const course = await getCourseLessons({
-    courseId: params.courseId,
+    adminCourseId: params.adminCourseId,
     userId: session.user.id,
   });
 
@@ -54,7 +54,7 @@ export default async function CourseLessonsPage({
 
                   const session = await getRequiredAuthSession();
 
-                  const courseId = params.courseId;
+                  const courseId = params.adminCourseId;
 
                   //Authorize the user
                   await prisma.course.findFirstOrThrow({

@@ -52,7 +52,7 @@ export const CourseForm = ({ defaultValue }: CourseFormProps) => {
         if (defaultValue?.id) {
           console.log("Update course");
           const result = await courseActionEdit({
-            courseId: defaultValue.id,
+            adminCourseId: defaultValue.id,
             data: values,
           });
 

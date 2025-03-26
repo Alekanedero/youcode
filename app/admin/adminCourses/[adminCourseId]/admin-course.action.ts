@@ -4,12 +4,12 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 type toggleAdminCourseStateType = {
-  courseId?: string;
+  adminCourseId?: string;
   state?: "PUBLISHED" | "DRAFT";
 };
 
 export async function toggleAdminCourseState({
-  courseId,
+  adminCourseId,
   state,
 }: toggleAdminCourseStateType) {
   {
@@ -28,12 +28,12 @@ export async function toggleAdminCourseState({
 
     await prisma.course.update({
       where: {
-        id: courseId,
+        id: adminCourseId,
         creatorId: userId,
       },
       data: { state: newState },
     });
 
-    revalidatePath(`/admin/adminCourses/${courseId}`);
+    revalidatePath(`/admin/adminCourses/${adminCourseId}`);
   }
 }

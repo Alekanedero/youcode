@@ -6,7 +6,7 @@ import { CourseFormSchema } from "./course.schema";
 import { prisma } from "@/lib/prisma";
 
 const CourseActionEditProps = z.object({
-  courseId: z.string(),
+  adminCourseId: z.string(),
   data: CourseFormSchema,
 });
 
@@ -14,13 +14,13 @@ export const courseActionEdit = authenticatedAction
   .schema(CourseActionEditProps)
   .action(
     async ({
-      parsedInput: { courseId, data },
+      parsedInput: { adminCourseId, data },
       ctx: { userId },
     }): Promise<ActionResult<typeof data>> => {
       try {
         const course = await prisma.course.update({
           where: {
-            id: courseId,
+            id: adminCourseId,
             creatorId: userId,
           },
           data: data,

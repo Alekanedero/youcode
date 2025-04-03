@@ -40,11 +40,11 @@ export const Breadcrumb = () => {
   );
 };
 
-const isPrismaId = (id: string): boolean => {
-  // Regular expression to match URL-friendly strings of exactly 25 characters.
-  const regex = /^[\w-]{25}$/;
-  return regex.test(id);
-};
+// const isPrismaId = (id: string): boolean => {
+//   // Regular expression to match URL-friendly strings of exactly 25 characters.
+//   const regex = /^[\w-]{25}$/;
+//   return regex.test(id);
+// };
 
 export const formatId = (id: string) => {
   return `${id.slice(0, 2)}...${id.slice(-2)}`;

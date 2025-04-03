@@ -21,14 +21,6 @@ export function Header() {
             <Typography
               variant="link"
               as={Link}
-              href="/"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Portefolio
-            </Typography>
-            <Typography
-              variant="link"
-              as={Link}
               href="/explorer"
               className="text-muted-foreground hover:text-foreground"
             >

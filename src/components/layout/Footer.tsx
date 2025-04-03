@@ -36,7 +36,7 @@ export const Footer = () => {
         </div>
         <div className="flex w-full items-center justify-center">
           <Typography variant="base" className="text-xs text-muted-foreground">
-            &copy; 2025 YouCode
+            © 2025 Youcode – by Alexandre Compin
           </Typography>
         </div>
       </div>

@@ -91,7 +91,7 @@ export default function Home() {
       <div
         className="bg-secondary py-8 text-secondary-foreground xl:py-16"
         style={{
-          // @ts-ignore
+          // @ts-expect-error tailwindcss
           "--border": "240 3.7% 25%",
         }}
       >

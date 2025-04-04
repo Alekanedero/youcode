@@ -33,6 +33,14 @@ export const getCourseLessons = async ({
   });
 };
 
-export type AdminLessonItemType = NonNullable<
-  Prisma.PromiseReturnType<typeof getCourseLessons>
->["lessons"][number];
+// export type AdminLessonItemType = NonNullable<
+//   Prisma.PromiseReturnType<typeof getCourseLessons>
+// >["lessons"][number];
+
+export type AdminLessonItemType = Awaited<
+  ReturnType<typeof getCourseLessons>
+> extends { lessons: infer T }
+  ? T extends Array<infer U>
+    ? U
+    : never
+  : never;

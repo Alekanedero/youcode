@@ -9,7 +9,7 @@ export const getAdminCourse = async ({
   userId: string;
   userPage: number;
 }) => {
-  const courses = await prisma.course.findUnique({
+  const courses = (await prisma.course.findUnique({
     where: {
       creatorId: userId,
       id: adminCourseId,
@@ -42,7 +42,26 @@ export const getAdminCourse = async ({
         },
       },
     },
-  });
+  })) as {
+    id: string;
+    image: string | null;
+    name: string;
+    presentation: string | null;
+    state: string;
+    users: {
+      canceledAt: Date | null;
+      id: string;
+      user: {
+        email: string;
+        id: string;
+        image: string | null;
+      };
+    }[];
+    _count: {
+      lessons: number;
+      users: number;
+    };
+  } | null;
 
   const users = courses?.users.map((user) => {
     return {

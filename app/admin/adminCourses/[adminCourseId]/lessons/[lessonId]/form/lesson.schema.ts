@@ -13,3 +13,11 @@ export const LessonDetailsSchema = z.object({
 });
 
 export type LessonDetailsSchema = z.infer<typeof LessonDetailsSchema>;
+
+// ------------- Test fix mdx ---------------
+
+export const LessonContentSchema = z.object({
+  content: z.string().min(1, { message: "Le contenu ne peut pas être vide." }),
+});
+
+export type LessonContentSchema = z.infer<typeof LessonContentSchema>;

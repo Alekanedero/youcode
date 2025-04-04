@@ -1,7 +1,7 @@
 "use server";
 
 import { authenticatedAction } from "@/lib/action";
-import { LessonDetailsSchema } from "./form/lesson.schema";
+import { LessonContentSchema, LessonDetailsSchema } from "./form/lesson.schema";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 
@@ -29,14 +29,42 @@ export const LessonActionEditDetails = authenticatedAction
     };
   });
 
+// const LessonActionEditContentSchema = z.object({
+//   lessonId: z.string(),
+//   markdown: z.string(),
+// });
+
+// export const lessonActionEditContent = authenticatedAction
+//   .schema(LessonActionEditContentSchema)
+//   .action(async ({ parsedInput: { lessonId, markdown }, ctx: { userId } }) => {
+//     const lesson = await prisma.lesson.update({
+//       where: {
+//         id: lessonId,
+//         course: {
+//           creatorId: userId,
+//         },
+//       },
+//       data: {
+//         content: markdown,
+//       },
+//     });
+
+//     return {
+//       message: "Lesson updated successfully",
+//       lesson,
+//     };
+//   });
+
+//  --------------  fix MDX -----------------
+
 const LessonActionEditContentSchema = z.object({
   lessonId: z.string(),
-  markdown: z.string(),
+  content: LessonContentSchema,
 });
 
 export const lessonActionEditContent = authenticatedAction
   .schema(LessonActionEditContentSchema)
-  .action(async ({ parsedInput: { lessonId, markdown }, ctx: { userId } }) => {
+  .action(async ({ parsedInput: { lessonId, content }, ctx: { userId } }) => {
     const lesson = await prisma.lesson.update({
       where: {
         id: lessonId,
@@ -44,13 +72,11 @@ export const lessonActionEditContent = authenticatedAction
           creatorId: userId,
         },
       },
-      data: {
-        content: markdown,
-      },
+      data: content,
     });
 
     return {
       message: "Lesson updated successfully",
-      lesson,
+      data: lesson,
     };
   });

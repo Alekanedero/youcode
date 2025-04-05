@@ -23,6 +23,11 @@ import { ArrowRightToLine } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default async function AdminCoursesPage() {
+  /**
+   * Fetches the list of courses available for the admin.
+   *
+   * @returns {Promise<AdminCourseType[]>} A promise that resolves to an array of courses of type `AdminCourseType`.
+   */
   const courses = await getAdminCourses();
 
   return (

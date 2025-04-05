@@ -10,3 +10,5 @@ export const getAdminCourses = async () => {
     where: { creatorId: session?.user.id },
   });
 };
+
+export type AdminCoursesType = Awaited<ReturnType<typeof getAdminCourses>>;

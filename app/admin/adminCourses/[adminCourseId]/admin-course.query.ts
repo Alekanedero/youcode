@@ -78,6 +78,30 @@
 
 import { prisma } from "@/lib/prisma";
 
+export type usersType = Awaited<ReturnType<typeof getAdminCourse>>;
+
+type CourseWithUsers = {
+  id: string;
+  image: string | null;
+  name: string;
+  presentation: string | null;
+  state: string;
+  createdAt: Date;
+  users: {
+    canceledAt: Date | null;
+    id: string;
+    user: {
+      email: string;
+      id: string;
+      image: string | null;
+    };
+  }[];
+  _count: {
+    lessons: number;
+    users: number;
+  };
+} | null;
+
 export const getAdminCourse = async ({
   adminCourseId,
   userId,
@@ -87,7 +111,7 @@ export const getAdminCourse = async ({
   userId: string;
   userPage: number;
 }) => {
-  const courses = await prisma.course.findUnique({
+  const courses = (await prisma.course.findUnique({
     where: {
       creatorId: userId,
       id: adminCourseId,
@@ -121,7 +145,7 @@ export const getAdminCourse = async ({
         },
       },
     },
-  });
+  })) as CourseWithUsers;
 
   const users = courses?.users.map((user) => {
     return {

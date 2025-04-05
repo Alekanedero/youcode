@@ -155,3 +155,8 @@ export const getAdminCourse = async ({
     users,
   };
 };
+
+export type AdminCourseType = Awaited<ReturnType<typeof getAdminCourse>>;
+// export type AdminCourseCreatedAtType = NonNullable<AdminCourseType>["createdAt"];
+
+// export type createdAtType = Date;

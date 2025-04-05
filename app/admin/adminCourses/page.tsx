@@ -55,11 +55,11 @@ export default async function AdminCoursesPage() {
               </TableHeader>
               <TableBody>
                 {courses
-                  .sort(
-                    (a, b) =>
-                      new Date(b.createdAt).getTime() -
-                      new Date(a.createdAt).getTime()
-                  )
+                  // .sort(
+                  //   (a: createdAtType, b: createdAtType) =>
+                  //     new Date(b.createdAt).getTime() -
+                  //     new Date(a.createdAt).getTime()
+                  // )
                   .map((course) => (
                     <TableRow key={course.id}>
                       <TableCell>

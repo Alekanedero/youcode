@@ -128,6 +128,7 @@ export const getAdminCourse = async ({
     name: string;
     presentation: string | null;
     state: string;
+    createdAt: Date;
     users: {
       canceledAt: Date | null;
       id: string;

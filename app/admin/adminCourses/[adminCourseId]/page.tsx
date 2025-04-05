@@ -417,10 +417,15 @@ export default async function AdminCoursePage({
                 formAction={async () => {
                   "use server";
 
-                  await toggleAdminCourseState({
-                    adminCourseId: course.id,
-                    state: course.state,
-                  });
+                  if (
+                    course.state === "DRAFT" ||
+                    course.state === "PUBLISHED"
+                  ) {
+                    await toggleAdminCourseState({
+                      adminCourseId: course.id,
+                      state: course.state,
+                    });
+                  }
                 }}
               >
                 {course.state}

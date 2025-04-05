@@ -37,10 +37,14 @@ export const getCourseLessons = async ({
 //   Prisma.PromiseReturnType<typeof getCourseLessons>
 // >["lessons"][number];
 
-export type AdminLessonItemType = Awaited<
-  ReturnType<typeof getCourseLessons>
-> extends { lessons: infer T }
-  ? T extends Array<infer U>
-    ? U
-    : never
-  : never;
+// export type AdminLessonItemType = Awaited<
+//   ReturnType<typeof getCourseLessons>
+// > extends { lessons: infer T }
+//   ? T extends Array<infer U>
+//     ? U
+//     : never
+//   : never;
+
+export type AdminLessonItemType = NonNullable<
+  Awaited<ReturnType<typeof getCourseLessons>>
+>["lessons"][number];

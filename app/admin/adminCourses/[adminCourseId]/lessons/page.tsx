@@ -110,8 +110,9 @@ import { notFound, redirect } from "next/navigation";
 import { getCourseLessons } from "./lessons.query";
 import { SubmitButton } from "@/components/form/SubmitButton";
 import { prisma } from "@/lib/prisma";
-import { AdminLessonSortable } from "./AdminLessonSortable";
+
 import { getTheMiddleRank } from "@/lib/getTheMiddleRank";
+import { AdminLessonSortable } from "./AdminLessonSortable";
 
 export default async function CourseLessonsPage({
   params,

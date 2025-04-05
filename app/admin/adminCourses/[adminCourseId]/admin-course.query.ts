@@ -78,30 +78,33 @@
 
 import { prisma } from "@/lib/prisma";
 
-export type usersType = Awaited<ReturnType<typeof getAdminCourse>>;
+// Type pour un utilisateur du cours
+export type CourseUser = {
+  canceledAt: Date | null;
+  id: string;
+  user: {
+    email: string;
+    id: string;
+    image: string | null;
+  };
+};
 
-type CourseWithUsers = {
+// Type complet pour un cours avec les utilisateurs et les compteurs
+export type CourseWithUsers = {
   id: string;
   image: string | null;
   name: string;
   presentation: string | null;
   state: string;
   createdAt: Date;
-  users: {
-    canceledAt: Date | null;
-    id: string;
-    user: {
-      email: string;
-      id: string;
-      image: string | null;
-    };
-  }[];
+  users: CourseUser[];
   _count: {
     lessons: number;
     users: number;
   };
 } | null;
 
+// Fonction principale pour récupérer le cours
 export const getAdminCourse = async ({
   adminCourseId,
   userId,
@@ -111,7 +114,7 @@ export const getAdminCourse = async ({
   userId: string;
   userPage: number;
 }) => {
-  const courses = (await prisma.course.findUnique({
+  const course = (await prisma.course.findUnique({
     where: {
       creatorId: userId,
       id: adminCourseId,
@@ -147,20 +150,22 @@ export const getAdminCourse = async ({
     },
   })) as CourseWithUsers;
 
-  const users = courses?.users.map((user) => {
+  const users = course?.users.map((user) => {
     return {
-      canceled: user.canceledAt ? true : false,
+      canceled: user.canceledAt !== null,
       ...user.user,
     };
   });
 
   return {
-    ...courses,
+    ...course,
     users,
   };
 };
 
+// Type final du retour de la fonction
 export type AdminCourseType = Awaited<ReturnType<typeof getAdminCourse>>;
+
 // export type AdminCourseCreatedAtType = NonNullable<AdminCourseType>["createdAt"];
 
 // export type createdAtType = Date;

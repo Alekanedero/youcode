@@ -37,6 +37,8 @@ export const getCourseLessons = async ({
 //   Prisma.PromiseReturnType<typeof getCourseLessons>
 // >["lessons"][number];
 
+// fix mdxCompile, deployment, and server error
+
 // export type AdminLessonItemType = Awaited<
 //   ReturnType<typeof getCourseLessons>
 // > extends { lessons: infer T }

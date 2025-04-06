@@ -4,10 +4,10 @@ import { lessonActionEditContent } from "../lesson.action";
 import {
   Form,
   FormControl,
-  FormDescription,
+  // FormDescription,
   FormField,
   FormItem,
-  FormLabel,
+  // FormLabel,
   FormMessage,
   useZodForm,
 } from "@/components/ui/form";
@@ -15,6 +15,7 @@ import { LessonContentSchema } from "./lesson.schema";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "@/components/form/SubmitButton";
+import { Textarea } from "@/components/ui/textarea";
 
 export type LessonContentFormProps = {
   defaultValue: LessonContentSchema & {
@@ -85,13 +86,10 @@ export const LessonContentForm = ({ defaultValue }: LessonContentFormProps) => {
     <Form
       form={form}
       onSubmit={async (value) => {
-        console.log(value);
-
         try {
           let result;
 
           if (defaultValue?.id) {
-            console.log("Update lesson");
             result = await lessonActionEditContent({
               lessonId: defaultValue.id,
               content: value,
@@ -111,16 +109,19 @@ export const LessonContentForm = ({ defaultValue }: LessonContentFormProps) => {
         name="content"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Name</FormLabel>
+            {/* <FormLabel>Name</FormLabel> */}
             <FormControl>
-              <Input {...field} />
+              <Textarea {...field} rows={8} />
+              {/* <Input {...field} /> */}
             </FormControl>
-            <FormDescription>Enter the name of the lesson</FormDescription>
+            {/* <FormDescription>Enter the name of the lesson</FormDescription> */}
             <FormMessage />
           </FormItem>
         )}
       />
-      <SubmitButton type="submit">Submit</SubmitButton>
+      <SubmitButton type="submit" className="mt-8">
+        Submit
+      </SubmitButton>
     </Form>
   );
 };

@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+// import { Prisma } from "@prisma/client";
 
 export const getCourses = async (userId?: string) => {
   return await prisma.course.findMany({
@@ -39,4 +39,6 @@ export const getCourses = async (userId?: string) => {
 };
 
 // Définir le type CoursesCard pour représenter le type de chaque élément retourné par getCourses
-export type CoursesCard = Prisma.PromiseReturnType<typeof getCourses>[number];
+// export type CoursesCard = Prisma.PromiseReturnType<typeof getCourses>[number];
+
+export type CoursesCard = Awaited<ReturnType<typeof getCourses>>[number];

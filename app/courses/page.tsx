@@ -5,7 +5,7 @@ import {
   LayoutTitle,
 } from "@/components/layout/layout";
 import { CourseCard } from "../courses/CourseCard";
-import { getCourses } from "../courses/course.query";
+import { CoursesCard, getCourses } from "../courses/course.query";
 import { getAuthSession } from "@/lib/auth";
 import { NotAuthentificatedCard } from "@/features/errors/NotAuthentificatedCard";
 
@@ -16,7 +16,7 @@ export default async function CoursesPage() {
     return <NotAuthentificatedCard />;
   }
 
-  const courses = await getCourses(session.user.id);
+  const courses: CoursesCard[] = await getCourses(session.user.id);
 
   return (
     <Layout>

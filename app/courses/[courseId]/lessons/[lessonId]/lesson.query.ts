@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+// import { Prisma } from "@prisma/client";
 
 export const getLesson = async (lessonId: string, userId = "-") => {
   const lesson = await prisma.lesson.findUnique({
@@ -36,6 +36,10 @@ export const getLesson = async (lessonId: string, userId = "-") => {
   };
 };
 
-export type LessonType = NonNullable<
-  Prisma.PromiseReturnType<typeof getLesson>
->;
+// export type LessonType = NonNullable<
+//   Prisma.PromiseReturnType<typeof getLesson>
+// >;
+
+// ------------ fix ---------------
+
+export type LessonType = NonNullable<Awaited<ReturnType<typeof getLesson>>>;

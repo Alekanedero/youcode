@@ -5,13 +5,13 @@ import { CheckCircle, Circle, CircleDashed, Globe } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { CourseLessonItem } from "../../course.query";
+import { CourseLessonType } from "../../course.query";
 
 export type LessonNavigationItemProps = {
-  lesson: CourseLessonItem;
+  lesson: CourseLessonType;
 };
 
-export const getLessonIcon = (progress: CourseLessonItem["progress"]) => {
+export const getLessonIcon = (progress: CourseLessonType["progress"]) => {
   if (progress === "COMPLETED") {
     return CheckCircle;
   }

@@ -34,24 +34,11 @@
 // }
 
 // ------------- fix 2 --------------
-import { PrismaClient } from "@prisma/client"; // Assure-toi que PrismaClient est bien importé ici
+// lib/prisma.ts
+import { PrismaClient } from "@prisma/client";
 
-// Définir l'instance PrismaClient
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
+const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
-// Créer une instance globale ou une nouvelle connexion si nécessaire
-export const prisma =
-  globalForPrisma.prisma ??
-  new PrismaClient({
-    log:
-      process.env.NODE_ENV === "development"
-        ? ["query", "error", "warn"]
-        : ["error"],
-  });
+export const prisma = globalForPrisma.prisma || new PrismaClient();
 
-// Dans un environnement non-production, conserver l'instance Prisma pour éviter des reconnections multiples en dev
-if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma;
-}
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;

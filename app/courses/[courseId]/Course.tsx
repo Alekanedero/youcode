@@ -44,7 +44,14 @@ export const Course = ({ course, userId }: CourseProps) => {
             </div>
           </CardHeader>
           <CardContent>
-            <MarkdownProse markdown={course.presentation} />
+            {/* <MarkdownProse markdown={course.presentation} /> */}
+            {course.presentation ? (
+              <MarkdownProse markdown={course.presentation} />
+            ) : (
+              <p className="text-muted-foreground">
+                No presentation available for this course.
+              </p>
+            )}
           </CardContent>
         </Card>
         <Card className="flex-1">

@@ -10,7 +10,6 @@ import { getRequiredAuthSession } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { LessonNavigationItem } from "./lessons/[lessonId]/LessonNavigationItem";
 import { redirect } from "next/navigation";
-import { LessonType } from "./lessons/[lessonId]/lesson.query";
 
 export type CourseProps = {
   course: CourseType;

@@ -163,7 +163,14 @@ export const getCourse = async ({
 
   if (!course) return null;
 
-  const lessons = course.lessons.map((lesson) => {
+  const typedCourse = course as Omit<
+    CourseType,
+    "isEnrolled" | "isCanceled" | "lessons"
+  > & {
+    lessons: CourseLessonType[];
+  };
+
+  const lessons = typedCourse.lessons.map((lesson) => {
     const progress = lesson.users[0]?.progress ?? "NOT_STARTED";
     return {
       ...lesson,

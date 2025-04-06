@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+// import { Prisma } from "@prisma/client";
 
 export const getCourse = async ({
   courseId,
@@ -85,8 +85,10 @@ export const getCourse = async ({
   };
 };
 
-export type CourseType = NonNullable<
-  Prisma.PromiseReturnType<typeof getCourse>
->;
+// export type CourseType = NonNullable<
+//   Prisma.PromiseReturnType<typeof getCourse>
+// >;
 
-export type CourseLessonItem = CourseType["lessons"][0];
+export type CourseType = NonNullable<Awaited<ReturnType<typeof getCourse>>>;
+
+export type CourseLessonType = CourseType["lessons"][0];

@@ -3,13 +3,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Typography } from "@/components/ui/typography";
 import { MarkdownProse } from "@/features/mdx/MarkdownProse";
-import { CourseType } from "./course.query";
+import { CourseLessonItem, CourseType } from "./course.query";
 import { SubmitButton } from "@/components/form/SubmitButton";
 import { prisma } from "@/lib/prisma";
 import { getRequiredAuthSession } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { LessonNavigationItem } from "./lessons/[lessonId]/LessonNavigationItem";
 import { redirect } from "next/navigation";
+import { LessonType } from "./lessons/[lessonId]/lesson.query";
 
 export type CourseProps = {
   course: CourseType;
@@ -52,7 +53,7 @@ export const Course = ({ course, userId }: CourseProps) => {
             <CardTitle>Lessons</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-2">
-            {course.lessons.map((lesson) => (
+            {course.lessons.map((lesson: CourseLessonItem) => (
               <LessonNavigationItem lesson={lesson} key={lesson.id} />
             ))}
           </CardContent>

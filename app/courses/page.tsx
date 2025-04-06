@@ -16,7 +16,10 @@ export default async function CoursesPage() {
     return <NotAuthentificatedCard />;
   }
 
-  const courses: CoursesCard[] = await getCourses(session.user.id);
+  // Force l'inférence explicite du type de courses
+  const courses = (await getCourses(session.user.id)) as CoursesCard[];
+
+  // const courses: CoursesCard[] = await getCourses(session.user.id);
   // const courses: Awaited<ReturnType<typeof getCourses>> = await getCourses(
   //   session.user.id
   // );
@@ -28,7 +31,7 @@ export default async function CoursesPage() {
       </LayoutHeader>
       <LayoutContent className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-2">
         {courses.map((course: CoursesCard) => (
-          <CourseCard course={course} key={course.id} />
+          <CourseCard course={course as CoursesCard} key={course.id} />
         ))}
       </LayoutContent>
     </Layout>

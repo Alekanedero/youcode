@@ -13,17 +13,16 @@ import { AuthButton } from "@/features/auth/AuthButton";
 export default function Home() {
   return (
     <div>
-      {/* HERO */}
       <div className="m-auto my-8 flex max-w-6xl flex-col gap-4 px-6 lg:my-16 lg:flex-row xl:my-24 xl:gap-8">
         <div className="flex flex-1 flex-col gap-4 lg:gap-6">
-          <h1 className="bg-gradient-to-r from-red-400 to-pink-600 bg-clip-text text-6xl font-extrabold text-transparent">
+          <h1 className="bg-gradient-to-r from-red-400 to-pink-600 bg-clip-text text-4xl lg:text-6xl font-extrabold text-transparent flex justify-center lg:justify-normal items-center">
             Create courses in seconds
           </h1>
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-xl lg:text-2xl font-bold">
             YouCode is the YouTube of education. You will create online courses
             in seconds.
           </h2>
-          <div className="flex items-center gap-8">
+          <div className="flex items-center flex-col lg:flex-row gap-8">
             <div className="flex">
               {Array.from({ length: 8 }).map((_, i) => (
                 <Avatar key={i} className="-mr-4">
@@ -46,7 +45,6 @@ export default function Home() {
         </div>
         <div></div>
       </div>
-      {/* VALUES */}
       <div className="bg-primary py-8 text-primary-foreground xl:py-16">
         <div className="m-auto flex max-w-5xl flex-col gap-3 px-6 xl:flex-row xl:gap-6">
           <div className="flex flex-1 flex-col items-center gap-2 text-center">
@@ -74,12 +72,11 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* CTA */}
       <div className="my-8 flex flex-col items-center gap-4 lg:my-16 xl:my-24">
-        <h2 className="bg-gradient-to-r from-red-400 to-pink-600 bg-clip-text text-4xl font-extrabold text-transparent p-4">
+        <h2 className="bg-gradient-to-r from-red-400 to-pink-600 bg-clip-text text-3xl lg:text-4xl font-extrabold text-transparent p-4">
           Start building your course today
         </h2>
-        <p className="text-center text-xl  py-8 max-w-3xl">
+        <p className="text-center text-xl px-4 py-8 max-w-3xl">
           All the current courses are fictitious, they are not real courses.
           What&#39;s interesting is how the platform works. I invite you to try
           out all its features. Don&#39;t hesitate to log in and try out the
@@ -87,7 +84,6 @@ export default function Home() {
         </p>
         <AuthButton />
       </div>
-      {/* FAQ */}
       <div
         className="bg-secondary py-8 text-secondary-foreground xl:py-16"
         style={{
@@ -107,9 +103,8 @@ export default function Home() {
           </Accordion>
         </div>
       </div>
-      {/* CTA */}
       <div className="my-8 flex flex-col items-center gap-4 lg:my-16 xl:my-24">
-        <h2 className="bg-gradient-to-r from-red-400 to-pink-600 bg-clip-text text-4xl font-extrabold text-transparent p-4">
+        <h2 className="bg-gradient-to-r from-red-400 to-pink-600 bg-clip-text text-3xl lg:text-4xl font-extrabold text-transparent p-4">
           Try it! It&#39;s free
         </h2>
       </div>
